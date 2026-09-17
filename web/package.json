@@ -1,5 +1,5 @@
 {
-	"name": "bbartfronted",
+	"name": "@bbart/web",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
@@ -28,6 +28,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@sanity/client": "^7.0.0"
+		"@bbart/sanity-config": "workspace:*",
+		"@sanity/client": "^7.0.0",
+		"groq": "^4.0.0"
 	}
 }

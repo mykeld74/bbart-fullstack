@@ -1,0 +1,182 @@
+{
+	"version": 1.1,
+	"properties": [
+		{
+			"name": "animation-timeline",
+			"description": "Specifies the timeline used to control a CSS animation’s progress (scroll() / view() / named timelines).",
+			"syntax": "[ auto | none | <dashed-ident> | <scroll()> | <view()> ]#",
+			"references": [
+				{
+					"name": "MDN Reference",
+					"url": "https://developer.mozilla.org/docs/Web/CSS/animation-timeline"
+				}
+			]
+		},
+		{
+			"name": "animation-range",
+			"description": "Shorthand for animation-range-start and animation-range-end along a timeline.",
+			"syntax": "[ <'animation-range-start'> <'animation-range-end'>? ]#",
+			"references": [
+				{
+					"name": "MDN Reference",
+					"url": "https://developer.mozilla.org/docs/Web/CSS/animation-range"
+				}
+			]
+		},
+		{
+			"name": "animation-range-start",
+			"description": "Start of an animation’s attachment range on its timeline.",
+			"syntax": "[ normal | <length-percentage> | <timeline-range-name> <length-percentage>? ]#",
+			"references": [
+				{
+					"name": "MDN Reference",
+					"url": "https://developer.mozilla.org/docs/Web/CSS/animation-range-start"
+				}
+			]
+		},
+		{
+			"name": "animation-range-end",
+			"description": "End of an animation’s attachment range on its timeline.",
+			"syntax": "[ normal | <length-percentage> | <timeline-range-name> <length-percentage>? ]#",
+			"references": [
+				{
+					"name": "MDN Reference",
+					"url": "https://developer.mozilla.org/docs/Web/CSS/animation-range-end"
+				}
+			]
+		},
+		{
+			"name": "timeline-scope",
+			"description": "Controls whether named scroll/view timelines can be referenced outside their subtree.",
+			"syntax": "none | all | <dashed-ident>#",
+			"references": [
+				{
+					"name": "MDN Reference",
+					"url": "https://developer.mozilla.org/docs/Web/CSS/timeline-scope"
+				}
+			]
+		},
+		{
+			"name": "view-timeline",
+			"description": "Shorthand for view-timeline-name and view-timeline-axis.",
+			"syntax": "[ <'view-timeline-name'> <'view-timeline-axis'>? ]#",
+			"references": [
+				{
+					"name": "MDN Reference",
+					"url": "https://developer.mozilla.org/docs/Web/CSS/view-timeline"
+				}
+			]
+		},
+		{
+			"name": "view-timeline-name",
+			"description": "Defines a named view progress timeline.",
+			"syntax": "none | <dashed-ident>#",
+			"references": [
+				{
+					"name": "MDN Reference",
+					"url": "https://developer.mozilla.org/docs/Web/CSS/view-timeline-name"
+				}
+			]
+		},
+		{
+			"name": "view-timeline-axis",
+			"description": "Scroll axis for a view progress timeline.",
+			"syntax": "[ block | inline | x | y ]#",
+			"references": [
+				{
+					"name": "MDN Reference",
+					"url": "https://developer.mozilla.org/docs/Web/CSS/view-timeline-axis"
+				}
+			]
+		},
+		{
+			"name": "view-timeline-inset",
+			"description": "Insets that adjust when an element is considered in view for a view timeline.",
+			"syntax": "[ [ auto | <length-percentage> ]{1,2} ]#",
+			"references": [
+				{
+					"name": "MDN Reference",
+					"url": "https://developer.mozilla.org/docs/Web/CSS/view-timeline-inset"
+				}
+			]
+		},
+		{
+			"name": "scroll-timeline",
+			"description": "Shorthand for scroll-timeline-name and scroll-timeline-axis.",
+			"syntax": "[ <'scroll-timeline-name'> <'scroll-timeline-axis'>? ]#",
+			"references": [
+				{
+					"name": "MDN Reference",
+					"url": "https://developer.mozilla.org/docs/Web/CSS/scroll-timeline"
+				}
+			]
+		},
+		{
+			"name": "scroll-timeline-name",
+			"description": "Defines a named scroll progress timeline.",
+			"syntax": "none | <dashed-ident>#",
+			"references": [
+				{
+					"name": "MDN Reference",
+					"url": "https://developer.mozilla.org/docs/Web/CSS/scroll-timeline-name"
+				}
+			]
+		},
+		{
+			"name": "scroll-timeline-axis",
+			"description": "Scroll axis for a scroll progress timeline.",
+			"syntax": "[ block | inline | x | y ]#",
+			"references": [
+				{
+					"name": "MDN Reference",
+					"url": "https://developer.mozilla.org/docs/Web/CSS/scroll-timeline-axis"
+				}
+			]
+		},
+		{
+			"name": "overlay",
+			"description": "Controls whether an element is rendered in the top layer (e.g. popovers/dialogs).",
+			"syntax": "none | auto",
+			"references": [
+				{
+					"name": "MDN Reference",
+					"url": "https://developer.mozilla.org/docs/Web/CSS/overlay"
+				}
+			]
+		}
+	],
+	"atDirectives": [
+		{
+			"name": "@starting-style",
+			"description": "Defines starting style values for transitions on elements that are first rendered or leave display: none.",
+			"references": [
+				{
+					"name": "MDN Reference",
+					"url": "https://developer.mozilla.org/docs/Web/CSS/@starting-style"
+				}
+			]
+		},
+		{
+			"name": "@container",
+			"description": "Applies styles based on a containment context’s size or style queries.",
+			"references": [
+				{
+					"name": "MDN Reference",
+					"url": "https://developer.mozilla.org/docs/Web/CSS/@container"
+				}
+			]
+		}
+	],
+	"pseudoClasses": [
+		{
+			"name": "popover-open",
+			"description": "Matches a popover element that is in the showing state.",
+			"references": [
+				{
+					"name": "MDN Reference",
+					"url": "https://developer.mozilla.org/docs/Web/CSS/:popover-open"
+				}
+			]
+		}
+	]
+}

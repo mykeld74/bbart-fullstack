@@ -2,6 +2,7 @@ import {defaultTheme, defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemas'
+import {dataset, projectId} from '@bbart/sanity-config'
 import {StudioLayout} from './studio/studioLayout'
 import {structure} from './studio/structure'
 
@@ -15,8 +16,8 @@ export default defineConfig({
   name: 'default',
   title: 'bbart',
 
-  projectId: 'eyosaf8p',
-  dataset: 'production',
+  projectId,
+  dataset,
 
   theme,
 

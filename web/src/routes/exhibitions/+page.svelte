@@ -16,10 +16,10 @@
 	}
 
 	function formatEventDate(event: {
-		isMultiDay?: boolean;
-		date?: string;
-		startDate?: string;
-		endDate?: string;
+		isMultiDay?: boolean | null;
+		date?: string | null;
+		startDate?: string | null;
+		endDate?: string | null;
 	}) {
 		if (event.isMultiDay && event.startDate && event.endDate) {
 			return `${formatDate(event.startDate)} – ${formatDate(event.endDate)}`;

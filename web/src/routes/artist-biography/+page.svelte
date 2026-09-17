@@ -20,7 +20,7 @@
 				alt={bio[0].mainImage?.alt || 'Brenda Bennett'}
 			/>
 		</div>
-		<PortableText value={bio[0].body} />
+		<PortableText value={bio[0].body ?? []} />
 	</div>
 	<div class="secondaryImage scrollFade">
 		<LoadingImage

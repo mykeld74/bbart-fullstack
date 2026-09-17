@@ -7,7 +7,7 @@
 		class: className = ''
 	}: {
 		src: string;
-		alt?: string;
+		alt?: string | null;
 		loading?: 'lazy' | 'eager';
 		fill?: boolean;
 		class?: string;
@@ -34,7 +34,7 @@
 
 <span class="loadingImage {className}" class:loaded class:fill>
 	<span class="shimmer" aria-hidden="true"></span>
-	<img bind:this={imgEl} {src} {alt} {loading} onload={markLoaded} onerror={markLoaded} />
+	<img bind:this={imgEl} {src} alt={alt ?? ''} {loading} onload={markLoaded} onerror={markLoaded} />
 </span>
 
 <style>

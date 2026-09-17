@@ -15,7 +15,7 @@
 		<div class="studioContainer">
 			<div class="herStudio">
 				<h1>{herStudio[0].title}</h1>
-				<PortableText value={herStudio[0].body} />
+				<PortableText value={herStudio[0].body ?? []} />
 			</div>
 			<div class="image1 imageContainer scrollFade">
 				<LoadingImage

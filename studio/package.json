@@ -1,5 +1,5 @@
 {
-  "name": "bbart",
+  "name": "@bbart/studio",
   "private": true,
   "version": "1.0.0",
   "main": "package.json",
@@ -9,7 +9,9 @@
     "start": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy",
-    "deploy-graphql": "sanity graphql deploy"
+    "deploy-graphql": "sanity graphql deploy",
+    "schema:extract": "sanity schema extract --path=./schema.json --force",
+    "typegen": "pnpm run schema:extract && sanity typegen generate"
   },
   "keywords": [
     "sanity"
@@ -18,6 +20,7 @@
     "node": ">=22.12"
   },
   "dependencies": {
+    "@bbart/sanity-config": "workspace:*",
     "@sanity/orderable-document-list": "^2.0.24",
     "@sanity/vision": "^6.14.1",
     "react": "^19.2.2",

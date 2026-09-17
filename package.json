@@ -1,0 +1,23 @@
+{
+  "name": "bbart-fullstack",
+  "private": true,
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "type": "module",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @bbart/web dev",
+    "dev:studio": "pnpm --filter @bbart/studio dev",
+    "build": "pnpm typegen && pnpm --filter @bbart/web build",
+    "build:studio": "pnpm --filter @bbart/studio build",
+    "build:all": "pnpm build:studio && pnpm build",
+    "deploy:studio": "pnpm --filter @bbart/studio deploy",
+    "schema:extract": "pnpm --filter @bbart/studio schema:extract",
+    "typegen": "pnpm --filter @bbart/studio typegen",
+    "check": "pnpm --filter @bbart/web check",
+    "lint": "pnpm --filter @bbart/web lint",
+    "format": "pnpm --filter @bbart/web format"
+  }
+}

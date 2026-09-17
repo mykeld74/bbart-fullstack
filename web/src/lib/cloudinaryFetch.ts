@@ -5,10 +5,10 @@ export function cloudinaryFetch(sanityUrl: string, transforms = 'f_auto,q_auto')
 }
 
 type SanityImage = {
-	asset?: { url?: string } | null;
+	asset?: { url?: string | null } | null;
 	alt?: string | null;
-	secure_url?: string;
-	url?: string;
+	secure_url?: string | null;
+	url?: string | null;
 };
 
 /** Resolve a Sanity image via Cloudinary fetch, or a legacy Cloudinary asset URL. */

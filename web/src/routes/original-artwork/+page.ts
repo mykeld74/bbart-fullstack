@@ -1,29 +1,29 @@
+import { defineQuery } from 'groq';
 import client from '$lib/client';
 export const prerender = true;
 
-const imageProjection = `mainImage{
-  alt,
-  asset->{
-    url
-  }
-}`;
+// Inlined rather than interpolated: typegen can only type a statically analyzable query string.
+const originalArtworkQuery = defineQuery(`*[_type == "artwork" && ("Original" in imgTypes[]->title)] | order(orderRank){
+	_id,
+	title,
+	slug,
+	size,
+	series[0]->,
+	imgTypes[]->,
+	price,
+	sold,
+	originalDescription,
+	printsDescription,
+	commissionDescription,
+	etsyLink,
+	mainImage{
+		alt,
+		asset->{ url }
+	}
+}`);
 
 export async function load() {
-	const query = `*[_type == "artwork" && ("Original" in imgTypes[]->title)] | order(orderRank){
-      _id,
-      title,
-      slug,
-      size,
-			series[0]->,
-			imgTypes[]->,
-      price,
-      sold,
-      originalDescription,
-      printsDescription,
-      etsyLink,
-      ${imageProjection}
-		}`;
-	const Artwork = await client.fetch(query);
+	const Artwork = await client.fetch(originalArtworkQuery);
 
 	return { Artwork };
 }
