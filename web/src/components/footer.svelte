@@ -30,6 +30,7 @@
 		width: 100%;
 		border-top: 1px solid #ccc;
 		padding: 20px 0;
+		margin-top: 40px;
 	}
 	.socialContainer {
 		display: flex;

@@ -9,10 +9,14 @@ const bioQuery = defineQuery(`*[_type == "page" && slug.current == 'artist-biogr
 	body,
 	mainImage{
 		alt,
+		secure_url,
+		url,
 		asset->{ url }
 	},
 	secondaryImage{
 		alt,
+		secure_url,
+		url,
 		asset->{ url }
 	}
 }`);

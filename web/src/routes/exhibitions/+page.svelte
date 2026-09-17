@@ -408,6 +408,10 @@
 		margin-top: 12px;
 	}
 
+	.eventDescription :global(a) {
+		color: var(--primaryColor);
+	}
+
 	@media (prefers-reduced-motion: reduce) {
 		.eventModal,
 		.eventModal::backdrop {
