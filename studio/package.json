@@ -1,0 +1,41 @@
+{
+  "name": "bbart",
+  "private": true,
+  "version": "1.0.0",
+  "main": "package.json",
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "sanity dev",
+    "start": "sanity start",
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "deploy-graphql": "sanity graphql deploy"
+  },
+  "keywords": [
+    "sanity"
+  ],
+  "engines": {
+    "node": ">=22.12"
+  },
+  "dependencies": {
+    "@sanity/orderable-document-list": "^2.0.24",
+    "@sanity/vision": "^6.14.1",
+    "react": "^19.2.2",
+    "react-dom": "^19.2.2",
+    "sanity": "^6.14.1",
+    "styled-components": "^6.1.15"
+  },
+  "devDependencies": {
+    "@sanity/eslint-config-studio": "^7.0.0",
+    "eslint": "^10.0.0",
+    "lexorank": "^1.0.5",
+    "prettier": "^3.9.0",
+    "typescript": "^5.9.0"
+  },
+  "prettier": {
+    "semi": false,
+    "printWidth": 100,
+    "bracketSpacing": false,
+    "singleQuote": true
+  }
+}
