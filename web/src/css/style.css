@@ -1,0 +1,166 @@
+@import './reset.css';
+
+body,
+html {
+	font-family: 'Special Elite', sans-serif;
+}
+:root {
+	--primaryColor: #339966;
+	--linkColor: #000;
+	--black: #000;
+	--navTemplateColumns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+h1 {
+	font-size: clamp(30px, 5vw, 50px);
+	font-weight: 300;
+}
+h2 {
+	font-size: clamp(22px, 4vw, 30px);
+	font-weight: 300;
+}
+p,
+ul,
+ol,
+li {
+	font-size: clamp(18px, 2.5vw, 22px);
+	line-height: 1.25;
+	font-weight: 100;
+}
+.container {
+	width: calc(100% - 40px);
+	max-width: 1280px;
+	margin: auto;
+}
+
+a {
+	color: var(--linkColor);
+	text-decoration: none;
+}
+@container navBar (max-width: 579px) {
+	#navBar {
+		--navTemplateColumns: 1fr;
+	}
+	.buttonContainer {
+		border-right: none !important;
+		border-bottom: 1px solid #333;
+	}
+	.navButton {
+		justify-content: flex-start;
+	}
+}
+
+.studioContainer {
+	display: grid;
+	grid-template-areas:
+		'desc studioImage1 studioImage1'
+		'desc studioImage2 studioImage3'
+		'studioImage4 studioImage5 studioImage5';
+	grid-template-columns: 4fr 3fr 3fr;
+	gap: 20px;
+	margin-bottom: 30px;
+}
+
+@container studio (max-width: 600px) {
+	.studioContainer {
+		grid-template-areas:
+			'desc'
+			'studioImage1'
+			'studioImage2'
+			'studioImage3'
+			'studioImage4'
+			'studioImage5';
+		grid-template-columns: 1fr;
+	}
+}
+
+@keyframes scrollFadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(2.75rem);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/*
+  CSS-only scroll-driven reveals.
+  Finish early in the entry phase so partially visible rows on load
+  are already at the final state (not stuck mid-fade).
+*/
+@supports (animation-timeline: view()) {
+	.scrollFade {
+		animation: scrollFadeIn ease-out both;
+		animation-timeline: view();
+		/* Long enough to read on scroll; early enough that mostly-visible rows finish on load */
+		animation-range: entry 0% entry 58%;
+	}
+
+	/* Desktop 3-wide: left → center → right */
+	@media (min-width: 1100px) {
+		.artworkContainer:not(.fourWide) > :nth-child(3n + 1) .scrollFade {
+			animation-range: entry 0% entry 58%;
+		}
+		.artworkContainer:not(.fourWide) > :nth-child(3n + 2) .scrollFade {
+			animation-range: entry 10% entry 68%;
+		}
+		.artworkContainer:not(.fourWide) > :nth-child(3n + 3) .scrollFade {
+			animation-range: entry 20% entry 78%;
+		}
+
+		.artworkContainer.fourWide > :nth-child(4n + 1) .scrollFade {
+			animation-range: entry 0% entry 58%;
+		}
+		.artworkContainer.fourWide > :nth-child(4n + 2) .scrollFade {
+			animation-range: entry 10% entry 68%;
+		}
+		.artworkContainer.fourWide > :nth-child(4n + 3) .scrollFade {
+			animation-range: entry 20% entry 78%;
+		}
+		.artworkContainer.fourWide > :nth-child(4n + 4) .scrollFade {
+			animation-range: entry 30% entry 88%;
+		}
+
+		.linkContainer > :nth-child(3n + 1).scrollFade {
+			animation-range: entry 0% entry 58%;
+		}
+		.linkContainer > :nth-child(3n + 2).scrollFade {
+			animation-range: entry 10% entry 68%;
+		}
+		.linkContainer > :nth-child(3n + 3).scrollFade {
+			animation-range: entry 20% entry 78%;
+		}
+	}
+
+	@media (min-width: 700px) and (max-width: 1099px) {
+		.artworkContainer > :nth-child(2n + 1) .scrollFade,
+		.linkContainer > :nth-child(2n + 1).scrollFade,
+		.imgBlock > :nth-child(2n + 1).scrollFade {
+			animation-range: entry 0% entry 58%;
+		}
+		.artworkContainer > :nth-child(2n + 2) .scrollFade,
+		.linkContainer > :nth-child(2n + 2).scrollFade,
+		.imgBlock > :nth-child(2n + 2).scrollFade {
+			animation-range: entry 12% entry 70%;
+		}
+	}
+
+	.studioContainer .image1.scrollFade,
+	.studioContainer .image2.scrollFade,
+	.studioContainer .image4.scrollFade {
+		animation-range: entry 0% entry 58%;
+	}
+	.studioContainer .image3.scrollFade,
+	.studioContainer .image5.scrollFade {
+		animation-range: entry 12% entry 70%;
+	}
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+	.scrollFade {
+		animation: none;
+	}
+}
