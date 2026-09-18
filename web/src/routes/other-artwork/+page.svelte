@@ -1,9 +1,12 @@
 <script lang="ts">
 	import Card from '$components/card.svelte';
 	import ArtworkContainer from '$components/artworkContainer.svelte';
+	import { useQuery } from '@sanity/sveltekit';
+	import type { OtherArtworkQueryResult } from '$lib/sanity.types';
 
 	let { data } = $props();
-	const artwork = $derived(data.Artwork);
+	const query = $derived(useQuery<OtherArtworkQueryResult>(data));
+	const artwork = $derived($query.data ?? []);
 </script>
 
 <svelte:head><title>Other Artwork | Brenda Bennett Art</title></svelte:head>

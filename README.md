@@ -7,8 +7,19 @@ land in the same commit.
 | Path                      | What it is                                                    |
 | ------------------------- | ------------------------------------------------------------- |
 | `studio/`                 | Sanity Studio (Sanity 6, React 19) — the content backend       |
-| `web/`                    | Public site (SvelteKit 2, Svelte 5), prerendered at build time |
+| `web/`                    | Public site (SvelteKit 2, Svelte 5), server-rendered per request |
 | `packages/sanity-config/` | `projectId` / `dataset` / `apiVersion`, shared by both         |
+| `docs/`                   | Written docs, including the Studio guide for content editors  |
+
+Editing content rather than code? See [`docs/studio-guide.md`](docs/studio-guide.md),
+or hand someone the printable [Studio User Guide](docs/Brenda-Bennett-Art-Studio-Guide.pdf).
+
+The PDF is generated — edit `docs/build-studio-guide.py` and re-run it, then
+update the markdown to match:
+
+```bash
+pip install reportlab && python docs/build-studio-guide.py
+```
 
 ## Setup
 

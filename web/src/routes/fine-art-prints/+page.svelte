@@ -1,8 +1,20 @@
 <script lang="ts">
 	import { getImageSrc } from '$lib/cloudinaryFetch';
 	import LoadingImage from '$components/loadingImage.svelte';
+	import { useQuery } from '@sanity/sveltekit';
+	import type { FinePrintsQueryResult } from '$lib/sanity.types';
 
 	let { data } = $props();
+	const query = $derived(useQuery<FinePrintsQueryResult>(data));
+	const images = $derived($query.data ?? []);
+
+	// The query returns the three pieces in title order; each one is the cover
+	// for a gallery. A renamed piece drops out, so the image is optional.
+	const links = $derived([
+		{ href: '/other-artwork', label: 'Other Artwork', piece: images[0] },
+		{ href: '/colorado-flag', label: 'Colorado Flag Series', piece: images[1] },
+		{ href: '/aspens', label: 'Aspen Series', piece: images[2] }
+	]);
 </script>
 
 <svelte:head>
@@ -13,42 +25,22 @@
 	<h1>Fine Art Prints</h1>
 
 	<div class="linkContainer">
-		<div class="linkPrints scrollFade">
-			<a href="/other-artwork">
-				<div class="image">
-					<LoadingImage
-						src={getImageSrc(data.Images[0].mainImage, 'f_auto,q_auto,w_500')}
-						alt={data.Images[0].mainImage?.alt || data.Images[0].title}
-						fill
-					/>
-				</div>
-				<div class="linkText"><p>Other Artwork</p></div>
-			</a>
-		</div>
-		<div class="linkPrints scrollFade">
-			<a href="/colorado-flag">
-				<div class="image">
-					<LoadingImage
-						src={getImageSrc(data.Images[1].mainImage, 'f_auto,q_auto,w_500')}
-						alt={data.Images[1].mainImage?.alt || data.Images[1].title}
-						fill
-					/>
-				</div>
-				<div class="linkText"><p>Colorado Flag Series</p></div>
-			</a>
-		</div>
-		<div class="linkPrints scrollFade">
-			<a href="/aspens">
-				<div class="image">
-					<LoadingImage
-						src={getImageSrc(data.Images[2].mainImage, 'f_auto,q_auto,w_500')}
-						alt={data.Images[2].mainImage?.alt || data.Images[2].title}
-						fill
-					/>
-				</div>
-				<div class="linkText"><p>Aspen Series</p></div>
-			</a>
-		</div>
+		{#each links as { href, label, piece } (href)}
+			<div class="linkPrints scrollFade">
+				<a {href}>
+					{#if piece?.mainImage}
+						<div class="image">
+							<LoadingImage
+								src={getImageSrc(piece.mainImage, 'f_auto,q_auto,w_500')}
+								alt={piece.mainImage.alt || piece.title || label}
+								fill
+							/>
+						</div>
+					{/if}
+					<div class="linkText"><p>{label}</p></div>
+				</a>
+			</div>
+		{/each}
 	</div>
 </div>
 

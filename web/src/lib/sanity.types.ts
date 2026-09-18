@@ -455,6 +455,220 @@ export type Geopoint = {
 
 export type AllSanitySchemaTypes = SanityImageAssetReference | SplitContent | ImagePair | ImageWithCaption | TextBlock | SiteSettings | SanityImageCrop | SanityImageHotspot | NavCategory | Series | PageBuilder | NavCategoryReference | Page | BlockContent | Slug | ImageType | Event | SeriesReference | ImageTypeReference | Artwork | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 
+// Source: ../web/src/lib/artworkQueries.ts
+// Variable: aspensQuery
+// Query: *[_type == "artwork" && ("Aspen" in series[]->title)] | order(orderRank) {	_id,	title,	slug,	size,	series[]->,	imgTypes[]->,	price,	sold,	originalDescription,	printsDescription,	commissionDescription,	etsyLink,	mainImage{		alt,		asset->{ url }	}}
+export type AspensQueryResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  size: string | null;
+  series: Array<{
+    _id: string;
+    _type: "series";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title?: string;
+    order?: number;
+  }> | null;
+  imgTypes: Array<{
+    _id: string;
+    _type: "imageType";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title?: string;
+    order?: number;
+  }> | null;
+  price: number | null;
+  sold: boolean | null;
+  originalDescription: BlockContent | null;
+  printsDescription: BlockContent | null;
+  commissionDescription: BlockContent | null;
+  etsyLink: string | null;
+  mainImage: {
+    alt: null;
+    asset: {
+      url: string | null;
+    } | null;
+  } | null;
+}>;
+
+// Source: ../web/src/lib/artworkQueries.ts
+// Variable: coloradoFlagQuery
+// Query: *[_type == "artwork" && ("Colorado Flag" in series[]->title)] | order(orderRank){	_id,	title,	slug,	size,	series[]->,	imgTypes[]->,	price,	sold,	originalDescription,	printsDescription,	commissionDescription,	etsyLink,	mainImage{		alt,		asset->{ url }	}}
+export type ColoradoFlagQueryResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  size: string | null;
+  series: Array<{
+    _id: string;
+    _type: "series";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title?: string;
+    order?: number;
+  }> | null;
+  imgTypes: Array<{
+    _id: string;
+    _type: "imageType";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title?: string;
+    order?: number;
+  }> | null;
+  price: number | null;
+  sold: boolean | null;
+  originalDescription: BlockContent | null;
+  printsDescription: BlockContent | null;
+  commissionDescription: BlockContent | null;
+  etsyLink: string | null;
+  mainImage: {
+    alt: null;
+    asset: {
+      url: string | null;
+    } | null;
+  } | null;
+}>;
+
+// Source: ../web/src/lib/artworkQueries.ts
+// Variable: otherArtworkQuery
+// Query: *[_type == "artwork" && ("Other" in series[]->title)] | order(orderRank){	_id,	title,	slug,	size,	series[]->,	imgTypes[]->,	price,	sold,	originalDescription,	printsDescription,	commissionDescription,	etsyLink,	mainImage{		alt,		asset->{ url }	}}
+export type OtherArtworkQueryResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  size: string | null;
+  series: Array<{
+    _id: string;
+    _type: "series";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title?: string;
+    order?: number;
+  }> | null;
+  imgTypes: Array<{
+    _id: string;
+    _type: "imageType";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title?: string;
+    order?: number;
+  }> | null;
+  price: number | null;
+  sold: boolean | null;
+  originalDescription: BlockContent | null;
+  printsDescription: BlockContent | null;
+  commissionDescription: BlockContent | null;
+  etsyLink: string | null;
+  mainImage: {
+    alt: null;
+    asset: {
+      url: string | null;
+    } | null;
+  } | null;
+}>;
+
+// Source: ../web/src/lib/artworkQueries.ts
+// Variable: originalArtworkQuery
+// Query: *[_type == "artwork" && ("Original" in imgTypes[]->title)] | order(orderRank){	_id,	title,	slug,	size,	series[0]->,	imgTypes[]->,	price,	sold,	originalDescription,	printsDescription,	commissionDescription,	etsyLink,	mainImage{		alt,		asset->{ url }	}}
+export type OriginalArtworkQueryResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  size: string | null;
+  series: {
+    _id: string;
+    _type: "series";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title?: string;
+    order?: number;
+  } | null;
+  imgTypes: Array<{
+    _id: string;
+    _type: "imageType";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title?: string;
+    order?: number;
+  }> | null;
+  price: number | null;
+  sold: boolean | null;
+  originalDescription: BlockContent | null;
+  printsDescription: BlockContent | null;
+  commissionDescription: BlockContent | null;
+  etsyLink: string | null;
+  mainImage: {
+    alt: null;
+    asset: {
+      url: string | null;
+    } | null;
+  } | null;
+}>;
+
+// Source: ../web/src/lib/artworkQueries.ts
+// Variable: commissionsQuery
+// Query: *[_type == "artwork" && ("Commission" in imgTypes[]->title)] | order(orderRank){	_id,	title,	slug,	size,	series[0]->,	imgTypes[]->,	price,	sold,	originalDescription,	printsDescription,	commissionDescription,	etsyLink,	mainImage{		alt,		asset->{ url }	}}
+export type CommissionsQueryResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  size: string | null;
+  series: {
+    _id: string;
+    _type: "series";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title?: string;
+    order?: number;
+  } | null;
+  imgTypes: Array<{
+    _id: string;
+    _type: "imageType";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title?: string;
+    order?: number;
+  }> | null;
+  price: number | null;
+  sold: boolean | null;
+  originalDescription: BlockContent | null;
+  printsDescription: BlockContent | null;
+  commissionDescription: BlockContent | null;
+  etsyLink: string | null;
+  mainImage: {
+    alt: null;
+    asset: {
+      url: string | null;
+    } | null;
+  } | null;
+}>;
+
+// Source: ../web/src/lib/artworkQueries.ts
+// Variable: finePrintsQuery
+// Query: *[_type == "artwork" && (title == "American War Horse" || title == "Blue Sky Basin" || title == "Moonlit Aspen")] | order(title asc){	_id,	title,	mainImage{		alt,		asset->{ url }	}}
+export type FinePrintsQueryResult = Array<{
+  _id: string;
+  title: string | null;
+  mainImage: {
+    alt: null;
+    asset: {
+      url: string | null;
+    } | null;
+  } | null;
+}>;
+
 // Source: ../web/src/lib/exhibitionsQueries.ts
 // Variable: exhibitionsPageQuery
 // Query: *[_type == "page" && slug.current == "exhibitions"][0] {	_id,	title,	pageBuilder[] {		...,		_type == "imageWithCaption" => {			...,			image {				alt,				asset->{ url }			}		},		_type == "imagePair" => {			...,			leftImage {				alt,				asset->{ url }			},			rightImage {				alt,				asset->{ url }			}		},		_type == "splitContent" => {			...,			leftImage {				alt,				asset->{ url }			},			rightImage {				alt,				asset->{ url }			}		}	}}
@@ -662,223 +876,15 @@ export type ArtPagesQueryResult = Array<{
   navTitle: string | null;
 }>;
 
-// Source: ../web/src/routes/aspens/+page.ts
-// Variable: aspensQuery
-// Query: *[_type == "artwork" && ("Aspen" in series[]->title)] | order(orderRank) {	_id,	title,	slug,	size,	series[]->,	imgTypes[]->,	price,	sold,	originalDescription,	printsDescription,	commissionDescription,	etsyLink,	mainImage{		alt,		asset->{ url }	}}
-export type AspensQueryResult = Array<{
-  _id: string;
-  title: string | null;
-  slug: Slug | null;
-  size: string | null;
-  series: Array<{
-    _id: string;
-    _type: "series";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    title?: string;
-    order?: number;
-  }> | null;
-  imgTypes: Array<{
-    _id: string;
-    _type: "imageType";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    title?: string;
-    order?: number;
-  }> | null;
-  price: number | null;
-  sold: boolean | null;
-  originalDescription: BlockContent | null;
-  printsDescription: BlockContent | null;
-  commissionDescription: BlockContent | null;
-  etsyLink: string | null;
-  mainImage: {
-    alt: null;
-    asset: {
-      url: string | null;
-    } | null;
-  } | null;
-}>;
-
-// Source: ../web/src/routes/colorado-flag/+page.ts
-// Variable: coloradoFlagQuery
-// Query: *[_type == "artwork" && ("Colorado Flag" in series[]->title)] | order(orderRank){	_id,	title,	slug,	size,	series[]->,	imgTypes[]->,	price,	sold,	originalDescription,	printsDescription,	commissionDescription,	etsyLink,	mainImage{		alt,		asset->{ url }	}}
-export type ColoradoFlagQueryResult = Array<{
-  _id: string;
-  title: string | null;
-  slug: Slug | null;
-  size: string | null;
-  series: Array<{
-    _id: string;
-    _type: "series";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    title?: string;
-    order?: number;
-  }> | null;
-  imgTypes: Array<{
-    _id: string;
-    _type: "imageType";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    title?: string;
-    order?: number;
-  }> | null;
-  price: number | null;
-  sold: boolean | null;
-  originalDescription: BlockContent | null;
-  printsDescription: BlockContent | null;
-  commissionDescription: BlockContent | null;
-  etsyLink: string | null;
-  mainImage: {
-    alt: null;
-    asset: {
-      url: string | null;
-    } | null;
-  } | null;
-}>;
-
-// Source: ../web/src/routes/commissions/+page.ts
-// Variable: commissionsQuery
-// Query: *[_type == "artwork" && ("Commission" in imgTypes[]->title)] | order(orderRank){	_id,	title,	slug,	size,	series[0]->,	imgTypes[]->,	price,	sold,	originalDescription,	printsDescription,	commissionDescription,	etsyLink,	mainImage{		alt,		asset->{ url }	}}
-export type CommissionsQueryResult = Array<{
-  _id: string;
-  title: string | null;
-  slug: Slug | null;
-  size: string | null;
-  series: {
-    _id: string;
-    _type: "series";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    title?: string;
-    order?: number;
-  } | null;
-  imgTypes: Array<{
-    _id: string;
-    _type: "imageType";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    title?: string;
-    order?: number;
-  }> | null;
-  price: number | null;
-  sold: boolean | null;
-  originalDescription: BlockContent | null;
-  printsDescription: BlockContent | null;
-  commissionDescription: BlockContent | null;
-  etsyLink: string | null;
-  mainImage: {
-    alt: null;
-    asset: {
-      url: string | null;
-    } | null;
-  } | null;
-}>;
-
-// Source: ../web/src/routes/fine-art-prints/+page.ts
-// Variable: finePrintsQuery
-// Query: *[_type == "artwork" && (title == "American War Horse" || title == "Blue Sky Basin" || title == "Moonlit Aspen")] | order(title asc){	_id,	title,	mainImage{		alt,		asset->{ url }	}}
-export type FinePrintsQueryResult = Array<{
-  _id: string;
-  title: string | null;
-  mainImage: {
-    alt: null;
-    asset: {
-      url: string | null;
-    } | null;
-  } | null;
-}>;
-
-// Source: ../web/src/routes/original-artwork/+page.ts
-// Variable: originalArtworkQuery
-// Query: *[_type == "artwork" && ("Original" in imgTypes[]->title)] | order(orderRank){	_id,	title,	slug,	size,	series[0]->,	imgTypes[]->,	price,	sold,	originalDescription,	printsDescription,	commissionDescription,	etsyLink,	mainImage{		alt,		asset->{ url }	}}
-export type OriginalArtworkQueryResult = Array<{
-  _id: string;
-  title: string | null;
-  slug: Slug | null;
-  size: string | null;
-  series: {
-    _id: string;
-    _type: "series";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    title?: string;
-    order?: number;
-  } | null;
-  imgTypes: Array<{
-    _id: string;
-    _type: "imageType";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    title?: string;
-    order?: number;
-  }> | null;
-  price: number | null;
-  sold: boolean | null;
-  originalDescription: BlockContent | null;
-  printsDescription: BlockContent | null;
-  commissionDescription: BlockContent | null;
-  etsyLink: string | null;
-  mainImage: {
-    alt: null;
-    asset: {
-      url: string | null;
-    } | null;
-  } | null;
-}>;
-
-// Source: ../web/src/routes/other-artwork/+page.ts
-// Variable: otherArtworkQuery
-// Query: *[_type == "artwork" && ("Other" in series[]->title)] | order(orderRank){	_id,	title,	slug,	size,	series[]->,	imgTypes[]->,	price,	sold,	originalDescription,	printsDescription,	commissionDescription,	etsyLink,	mainImage{		alt,		asset->{ url }	}}
-export type OtherArtworkQueryResult = Array<{
-  _id: string;
-  title: string | null;
-  slug: Slug | null;
-  size: string | null;
-  series: Array<{
-    _id: string;
-    _type: "series";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    title?: string;
-    order?: number;
-  }> | null;
-  imgTypes: Array<{
-    _id: string;
-    _type: "imageType";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    title?: string;
-    order?: number;
-  }> | null;
-  price: number | null;
-  sold: boolean | null;
-  originalDescription: BlockContent | null;
-  printsDescription: BlockContent | null;
-  commissionDescription: BlockContent | null;
-  etsyLink: string | null;
-  mainImage: {
-    alt: null;
-    asset: {
-      url: string | null;
-    } | null;
-  } | null;
-}>;
-
 // Query TypeMap
 declare global {
   interface SanityQueries {
+    "*[_type == \"artwork\" && (\"Aspen\" in series[]->title)] | order(orderRank) {\n\t_id,\n\ttitle,\n\tslug,\n\tsize,\n\tseries[]->,\n\timgTypes[]->,\n\tprice,\n\tsold,\n\toriginalDescription,\n\tprintsDescription,\n\tcommissionDescription,\n\tetsyLink,\n\tmainImage{\n\t\talt,\n\t\tasset->{ url }\n\t}\n}": AspensQueryResult;
+    "*[_type == \"artwork\" && (\"Colorado Flag\" in series[]->title)] | order(orderRank){\n\t_id,\n\ttitle,\n\tslug,\n\tsize,\n\tseries[]->,\n\timgTypes[]->,\n\tprice,\n\tsold,\n\toriginalDescription,\n\tprintsDescription,\n\tcommissionDescription,\n\tetsyLink,\n\tmainImage{\n\t\talt,\n\t\tasset->{ url }\n\t}\n}": ColoradoFlagQueryResult;
+    "*[_type == \"artwork\" && (\"Other\" in series[]->title)] | order(orderRank){\n\t_id,\n\ttitle,\n\tslug,\n\tsize,\n\tseries[]->,\n\timgTypes[]->,\n\tprice,\n\tsold,\n\toriginalDescription,\n\tprintsDescription,\n\tcommissionDescription,\n\tetsyLink,\n\tmainImage{\n\t\talt,\n\t\tasset->{ url }\n\t}\n}": OtherArtworkQueryResult;
+    "*[_type == \"artwork\" && (\"Original\" in imgTypes[]->title)] | order(orderRank){\n\t_id,\n\ttitle,\n\tslug,\n\tsize,\n\tseries[0]->,\n\timgTypes[]->,\n\tprice,\n\tsold,\n\toriginalDescription,\n\tprintsDescription,\n\tcommissionDescription,\n\tetsyLink,\n\tmainImage{\n\t\talt,\n\t\tasset->{ url }\n\t}\n}": OriginalArtworkQueryResult;
+    "*[_type == \"artwork\" && (\"Commission\" in imgTypes[]->title)] | order(orderRank){\n\t_id,\n\ttitle,\n\tslug,\n\tsize,\n\tseries[0]->,\n\timgTypes[]->,\n\tprice,\n\tsold,\n\toriginalDescription,\n\tprintsDescription,\n\tcommissionDescription,\n\tetsyLink,\n\tmainImage{\n\t\talt,\n\t\tasset->{ url }\n\t}\n}": CommissionsQueryResult;
+    "*[_type == \"artwork\" && (title == \"American War Horse\" || title == \"Blue Sky Basin\" || title == \"Moonlit Aspen\")] | order(title asc){\n\t_id,\n\ttitle,\n\tmainImage{\n\t\talt,\n\t\tasset->{ url }\n\t}\n}": FinePrintsQueryResult;
     "*[_type == \"page\" && slug.current == \"exhibitions\"][0] {\n\t_id,\n\ttitle,\n\tpageBuilder[] {\n\t\t...,\n\t\t_type == \"imageWithCaption\" => {\n\t\t\t...,\n\t\t\timage {\n\t\t\t\talt,\n\t\t\t\tasset->{ url }\n\t\t\t}\n\t\t},\n\t\t_type == \"imagePair\" => {\n\t\t\t...,\n\t\t\tleftImage {\n\t\t\t\talt,\n\t\t\t\tasset->{ url }\n\t\t\t},\n\t\t\trightImage {\n\t\t\t\talt,\n\t\t\t\tasset->{ url }\n\t\t\t}\n\t\t},\n\t\t_type == \"splitContent\" => {\n\t\t\t...,\n\t\t\tleftImage {\n\t\t\t\talt,\n\t\t\t\tasset->{ url }\n\t\t\t},\n\t\t\trightImage {\n\t\t\t\talt,\n\t\t\t\tasset->{ url }\n\t\t\t}\n\t\t}\n\t}\n}": ExhibitionsPageQueryResult;
     "*[_type == \"event\" && (\n\t(isMultiDay != true && date >= $today) ||\n\t(isMultiDay == true && endDate >= $today)\n)] | order(coalesce(startDate, date) asc) {\n\t_id,\n\ttitle,\n\tisMultiDay,\n\tdate,\n\tstartDate,\n\tendDate,\n\ttime,\n\tvenueName,\n\tvenueAddress,\n\tdescription,\n\timage {\n\t\talt,\n\t\tasset->{ url }\n\t}\n}": EventsQueryResult;
     "*[_type == \"page\" && slug.current == \"artist-biography\"][0] {\n\t_id,\n\ttitle,\n\tslug,\n\tbody,\n\tmainImage{\n\t\talt,\n\t\tsecure_url,\n\t\turl,\n\t\tasset->{ url }\n\t},\n\tsecondaryImage{\n\t\talt,\n\t\tsecure_url,\n\t\turl,\n\t\tasset->{ url }\n\t}\n}": BioQueryResult;
@@ -886,12 +892,6 @@ declare global {
     "*[_id == \"siteSettings\"][0] {\n\t_id,\n\tsocialLinks[] {\n\t\t_key,\n\t\ttitle,\n\t\turl,\n\t\timage {\n\t\t\tasset->{ url }\n\t\t}\n\t}\n}": SiteSettingsQueryResult;
     "*[_type == \"page\" && navCategory[0]->.title == \"Meet the Artist\"] | order(order asc){\n\t_id,\n\ttitle,\n\tslug,\n\tnavTitle\n}": ArtistPagesQueryResult;
     "*[_type == \"page\" && navCategory[0]->.title == \"Experience Art\"] | order(order asc){\n\t_id,\n\ttitle,\n\tslug,\n\tnavTitle\n}": ArtPagesQueryResult;
-    "*[_type == \"artwork\" && (\"Aspen\" in series[]->title)] | order(orderRank) {\n\t_id,\n\ttitle,\n\tslug,\n\tsize,\n\tseries[]->,\n\timgTypes[]->,\n\tprice,\n\tsold,\n\toriginalDescription,\n\tprintsDescription,\n\tcommissionDescription,\n\tetsyLink,\n\tmainImage{\n\t\talt,\n\t\tasset->{ url }\n\t}\n}": AspensQueryResult;
-    "*[_type == \"artwork\" && (\"Colorado Flag\" in series[]->title)] | order(orderRank){\n\t_id,\n\ttitle,\n\tslug,\n\tsize,\n\tseries[]->,\n\timgTypes[]->,\n\tprice,\n\tsold,\n\toriginalDescription,\n\tprintsDescription,\n\tcommissionDescription,\n\tetsyLink,\n\tmainImage{\n\t\talt,\n\t\tasset->{ url }\n\t}\n}": ColoradoFlagQueryResult;
-    "*[_type == \"artwork\" && (\"Commission\" in imgTypes[]->title)] | order(orderRank){\n\t_id,\n\ttitle,\n\tslug,\n\tsize,\n\tseries[0]->,\n\timgTypes[]->,\n\tprice,\n\tsold,\n\toriginalDescription,\n\tprintsDescription,\n\tcommissionDescription,\n\tetsyLink,\n\tmainImage{\n\t\talt,\n\t\tasset->{ url }\n\t}\n}": CommissionsQueryResult;
-    "*[_type == \"artwork\" && (title == \"American War Horse\" || title == \"Blue Sky Basin\" || title == \"Moonlit Aspen\")] | order(title asc){\n\t_id,\n\ttitle,\n\tmainImage{\n\t\talt,\n\t\tasset->{ url }\n\t}\n}": FinePrintsQueryResult;
-    "*[_type == \"artwork\" && (\"Original\" in imgTypes[]->title)] | order(orderRank){\n\t_id,\n\ttitle,\n\tslug,\n\tsize,\n\tseries[0]->,\n\timgTypes[]->,\n\tprice,\n\tsold,\n\toriginalDescription,\n\tprintsDescription,\n\tcommissionDescription,\n\tetsyLink,\n\tmainImage{\n\t\talt,\n\t\tasset->{ url }\n\t}\n}": OriginalArtworkQueryResult;
-    "*[_type == \"artwork\" && (\"Other\" in series[]->title)] | order(orderRank){\n\t_id,\n\ttitle,\n\tslug,\n\tsize,\n\tseries[]->,\n\timgTypes[]->,\n\tprice,\n\tsold,\n\toriginalDescription,\n\tprintsDescription,\n\tcommissionDescription,\n\tetsyLink,\n\tmainImage{\n\t\talt,\n\t\tasset->{ url }\n\t}\n}": OtherArtworkQueryResult;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too
