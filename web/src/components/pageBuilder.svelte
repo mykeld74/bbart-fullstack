@@ -6,7 +6,10 @@
 
 	type SanityImage = {
 		alt?: string | null;
-		asset?: { url?: string | null } | null;
+		asset?: {
+			url?: string | null;
+			metadata?: { dimensions?: { aspectRatio?: number | null } | null } | null;
+		} | null;
 		secure_url?: string | null;
 		url?: string | null;
 	};
@@ -49,6 +52,19 @@
 	type PageBuilderBlock = TextBlock | ImageWithCaption | ImagePair | SplitContent;
 
 	let { blocks = [] }: { blocks?: PageBuilderBlock[] | null } = $props();
+
+	/** Equal column width → average image heights = harmonic mean of aspect ratios. */
+	function sharedAspectRatio(
+		leftAr?: number | null,
+		rightAr?: number | null
+	): number | undefined {
+		if (!leftAr || !rightAr || leftAr <= 0 || rightAr <= 0) return undefined;
+		return 2 / (1 / leftAr + 1 / rightAr);
+	}
+
+	function aspectOf(image?: SanityImage | null) {
+		return image?.asset?.metadata?.dimensions?.aspectRatio;
+	}
 </script>
 
 {#each blocks ?? [] as block (block._key)}
@@ -80,10 +96,12 @@
 		</div>
 	{:else if block._type === 'imagePair'}
 		{@const ratio = stegaClean(block.ratio)}
+		{@const pairAspect = sharedAspectRatio(aspectOf(block.leftImage), aspectOf(block.rightImage))}
 		<div
 			class="imagePair"
 			class:wideLeft={ratio === 'wideLeft'}
 			class:wideRight={ratio === 'wideRight'}
+			style={pairAspect ? `--shared-aspect: ${pairAspect}` : undefined}
 		>
 			{#if block.leftImage}
 				<div class="imgContainer scrollFade">
@@ -104,11 +122,16 @@
 		</div>
 	{:else if block._type === 'splitContent'}
 		{@const layout = stegaClean(block.layout) || 'both'}
+		{@const splitAspect =
+			layout === 'both'
+				? sharedAspectRatio(aspectOf(block.leftImage), aspectOf(block.rightImage))
+				: undefined}
 		<div
 			class="splitContent"
 			class:both={layout === 'both'}
 			class:left={layout === 'left'}
 			class:right={layout === 'right'}
+			style={splitAspect ? `--shared-aspect: ${splitAspect}` : undefined}
 		>
 			{#if layout !== 'right' && block.leftImage}
 				<div class="imgContainer scrollFade">
@@ -196,6 +219,7 @@
 		grid-template-columns: 1fr 1fr;
 		gap: 30px;
 		margin: 1.5rem 0;
+		align-items: stretch;
 	}
 
 	.imagePair.wideLeft {
@@ -206,11 +230,38 @@
 		grid-template-columns: 1fr 2fr;
 	}
 
+	/* Equal-height frames; object-position bottom crops overflow from the top */
+	.imagePair .imgContainer {
+		aspect-ratio: var(--shared-aspect, 2 / 1);
+		overflow: hidden;
+		--loader-aspect: var(--shared-aspect, 2 / 1);
+	}
+
+	.imagePair .imgContainer :global(.loadingImage) {
+		height: 100%;
+	}
+
+	.imagePair .imgContainer :global(img) {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center bottom;
+	}
+
 	@media (max-width: 600px) {
 		.imagePair,
 		.imagePair.wideLeft,
 		.imagePair.wideRight {
 			grid-template-columns: 1fr;
+		}
+
+		.imagePair .imgContainer {
+			aspect-ratio: auto;
+		}
+
+		.imagePair .imgContainer :global(img) {
+			height: auto;
+			object-fit: contain;
 		}
 	}
 
@@ -234,6 +285,20 @@
 		grid-template-columns: 2fr 1fr;
 	}
 
+	/* Match side image heights (average of the two); crop taller from the top */
+	.splitContent.both .imgContainer :global(.loadingImage) {
+		aspect-ratio: var(--shared-aspect, 1);
+		overflow: hidden;
+		--loader-aspect: var(--shared-aspect, 1);
+	}
+
+	.splitContent.both .imgContainer :global(img) {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center bottom;
+	}
+
 	.splitContent .splitText :global(p) {
 		margin: 0;
 	}
@@ -253,6 +318,15 @@
 		.splitContent.left,
 		.splitContent.right {
 			grid-template-columns: 1fr;
+		}
+
+		.splitContent.both .imgContainer :global(.loadingImage) {
+			aspect-ratio: auto;
+		}
+
+		.splitContent.both .imgContainer :global(img) {
+			height: auto;
+			object-fit: contain;
 		}
 	}
 </style>

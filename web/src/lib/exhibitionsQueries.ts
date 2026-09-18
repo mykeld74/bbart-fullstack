@@ -16,22 +16,22 @@ export const exhibitionsPageQuery = defineQuery(`*[_type == "page" && slug.curre
 			...,
 			leftImage {
 				alt,
-				asset->{ url }
+				asset->{ url, metadata { dimensions { aspectRatio } } }
 			},
 			rightImage {
 				alt,
-				asset->{ url }
+				asset->{ url, metadata { dimensions { aspectRatio } } }
 			}
 		},
 		_type == "splitContent" => {
 			...,
 			leftImage {
 				alt,
-				asset->{ url }
+				asset->{ url, metadata { dimensions { aspectRatio } } }
 			},
 			rightImage {
 				alt,
-				asset->{ url }
+				asset->{ url, metadata { dimensions { aspectRatio } } }
 			}
 		}
 	}
