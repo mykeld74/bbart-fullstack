@@ -1,13 +1,17 @@
-import { createClient } from '@sanity/client';
-import { apiVersion, dataset, projectId } from '@bbart/sanity-config';
-import { building } from '$app/environment';
+import { createClient } from '@sanity/sveltekit'
+import { apiVersion, dataset, projectId } from '@bbart/sanity-config'
+import { building } from '$app/environment'
 
+/**
+ * Shared published-content client for universal loads that still import `$lib/client`.
+ * Preview / Presentation use `$lib/sanity` + `locals.sanity` instead.
+ */
 const client = createClient({
 	projectId,
 	dataset,
 	apiVersion,
-	// Skip the CDN outside production builds so Studio reorders show up immediately in dev
-	useCdn: building
-});
+	useCdn: building,
+	stega: false
+})
 
-export default client;
+export default client

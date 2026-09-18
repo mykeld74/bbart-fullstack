@@ -49,6 +49,17 @@ Two rules make this work:
 Re-run `pnpm typegen` after any schema change, and commit the regenerated file.
 The intermediate `studio/schema.json` is gitignored; the generated types are not.
 
+## Visual preview (Presentation)
+
+To edit exhibitions page builder blocks against a live preview:
+
+1. Copy `web/.env.example` → `web/.env` and set `SANITY_VIEWER_TOKEN` (Viewer role).
+2. Copy `studio/.env.example` → `studio/.env` (defaults to `http://localhost:5173`).
+3. Run `pnpm dev` and `pnpm dev:studio`.
+4. In Studio, open **Presentation**, then the Shows/Exhibitions page.
+
+Click overlays jump to the matching field; layout changes update in the iframe.
+
 ## History
 
 Grafted from the two original repos with `git subtree`, so `git log` still

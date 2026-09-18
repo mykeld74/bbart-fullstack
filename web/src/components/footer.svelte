@@ -1,28 +1,35 @@
-<script>
-	import etsy from '$img/etsy-icon.png';
-	import facebook from '$img/facebook-icon.png';
-	import instagram from '$img/instagram-icon.png';
-	import pinterest from '$img/pinterest-icon.png';
+<script lang="ts">
+	import { stegaClean } from '@sanity/sveltekit';
+	import { getImageSrc } from '$lib/cloudinaryFetch';
+
+	type SocialLink = {
+		_key?: string | null;
+		title?: string | null;
+		url?: string | null;
+		image?: {
+			asset?: { url?: string | null } | null;
+		} | null;
+	};
+
+	let { socialLinks = [] }: { socialLinks?: SocialLink[] | null } = $props();
+
+	const links = $derived(
+		(socialLinks ?? []).filter((link) => stegaClean(link.url) && getImageSrc(link.image))
+	);
 </script>
 
 <footer>
-	<div class="socialContainer">
-		<a href="https://www.etsy.com/shop/BrendaBennettArt" target="_blank" rel="noopener noreferrer"
-			><img src={etsy} alt="Etsy Icon" /></a
-		>
-		<a
-			href="https://www.instagram.com/brenda.bennett.art/"
-			target="_blank"
-			rel="noopener noreferrer"><img src={instagram} alt="Instagram Icon" /></a
-		>
-
-		<a href="https://www.pinterest.com/brendabennettart/" target="_blank" rel="noopener noreferrer"
-			><img src={pinterest} alt="Pinterest Icon" /></a
-		>
-		<a href="https://www.facebook.com/BrendaBennettArt" target="_blank" rel="noopener noreferrer"
-			><img src={facebook} alt="Facebook Icon" /></a
-		>
-	</div>
+	{#if links.length > 0}
+		<div class="socialContainer">
+			{#each links as link (link._key || stegaClean(link.url))}
+				{@const href = stegaClean(link.url) || '#'}
+				{@const title = stegaClean(link.title) || 'Social link'}
+				<a {href} target="_blank" rel="noopener noreferrer">
+					<img src={getImageSrc(link.image, 'f_auto,q_auto')} alt={title} />
+				</a>
+			{/each}
+		</div>
+	{/if}
 </footer>
 
 <style>

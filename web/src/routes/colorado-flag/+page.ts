@@ -1,4 +1,4 @@
-import { defineQuery } from 'groq';
+import { defineQuery } from '@sanity/sveltekit';
 import client from '$lib/client';
 export const prerender = true;
 

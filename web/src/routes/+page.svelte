@@ -17,7 +17,7 @@
 <style>
 	.banner {
 		max-width: 100vw;
-
+		margin-bottom: 40px;
 		img {
 			width: 100%;
 			height: auto;

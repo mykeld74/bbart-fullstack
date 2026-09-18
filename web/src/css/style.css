@@ -1,8 +1,15 @@
 @import './reset.css';
 
+html {
+	color-scheme: light;
+	background-color: #fff;
+}
+
 body,
 html {
 	font-family: 'Special Elite', sans-serif;
+	color: #000;
+	background-color: #fff;
 }
 :root {
 	--primaryColor: #339966;
@@ -27,6 +34,11 @@ li {
 	line-height: 1.25;
 	font-weight: 100;
 }
+
+/* Explicit rhythm — Visual Editing overlays can collapse UA paragraph margins */
+p {
+	margin: 0 0 1.25em;
+}
 .container {
 	width: calc(100% - 40px);
 	max-width: 1280px;
@@ -47,30 +59,6 @@ a {
 	}
 	.navButton {
 		justify-content: flex-start;
-	}
-}
-
-.studioContainer {
-	display: grid;
-	grid-template-areas:
-		'desc studioImage1 studioImage1'
-		'desc studioImage2 studioImage3'
-		'studioImage4 studioImage5 studioImage5';
-	grid-template-columns: 4fr 3fr 3fr;
-	gap: 20px;
-	margin-bottom: 30px;
-}
-
-@container studio (max-width: 600px) {
-	.studioContainer {
-		grid-template-areas:
-			'desc'
-			'studioImage1'
-			'studioImage2'
-			'studioImage3'
-			'studioImage4'
-			'studioImage5';
-		grid-template-columns: 1fr;
 	}
 }
 
@@ -145,16 +133,6 @@ a {
 		.imgBlock > :nth-child(2n + 2).scrollFade {
 			animation-range: entry 12% entry 70%;
 		}
-	}
-
-	.studioContainer .image1.scrollFade,
-	.studioContainer .image2.scrollFade,
-	.studioContainer .image4.scrollFade {
-		animation-range: entry 0% entry 58%;
-	}
-	.studioContainer .image3.scrollFade,
-	.studioContainer .image5.scrollFade {
-		animation-range: entry 12% entry 70%;
 	}
 }
 

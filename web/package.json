@@ -29,7 +29,7 @@
 	"type": "module",
 	"dependencies": {
 		"@bbart/sanity-config": "workspace:*",
-		"@sanity/client": "^7.0.0",
-		"groq": "^4.0.0"
+		"@sanity/client": "^8.6.2",
+		"@sanity/sveltekit": "^2.1.0"
 	}
 }

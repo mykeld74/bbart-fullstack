@@ -15,6 +15,151 @@
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: schema.json
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+};
+
+export type SplitContent = {
+  _type: "splitContent";
+  layout?: "both" | "left" | "right";
+  leftImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  leftCaption?: string;
+  body?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  rightImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  rightCaption?: string;
+};
+
+export type ImagePair = {
+  _type: "imagePair";
+  leftImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  rightImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  ratio?: "equal" | "wideLeft" | "wideRight";
+};
+
+export type ImageWithCaption = {
+  _type: "imageWithCaption";
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  caption?: string;
+  width?: "narrow" | "medium" | "full";
+};
+
+export type TextBlock = {
+  _type: "textBlock";
+  body?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  width?: "full" | "narrow";
+  align?: "left" | "center";
+};
+
+export type SiteSettings = {
+  _id: string;
+  _type: "siteSettings";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  socialLinks?: Array<{
+    title?: string;
+    url?: string;
+    image?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    _type: "socialLink";
+    _key: string;
+  }>;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
 export type NavCategory = {
   _id: string;
   _type: "navCategory";
@@ -34,18 +179,21 @@ export type Series = {
   order?: number;
 };
 
+export type PageBuilder = Array<{
+  _key: string;
+} & TextBlock | {
+  _key: string;
+} & ImageWithCaption | {
+  _key: string;
+} & ImagePair | {
+  _key: string;
+} & SplitContent>;
+
 export type NavCategoryReference = {
   _ref: string;
   _type: "reference";
   _weak?: boolean;
   [internalGroqTypeReferenceTo]?: "navCategory";
-};
-
-export type SanityImageAssetReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
 };
 
 export type Page = {
@@ -62,6 +210,7 @@ export type Page = {
     _key: string;
   } & NavCategoryReference>;
   body?: BlockContent;
+  pageBuilder?: PageBuilder;
   mainImage?: {
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -76,22 +225,24 @@ export type Page = {
     crop?: SanityImageCrop;
     _type: "image";
   };
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
+  studioHero?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  studioGallery?: Array<{
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    caption?: string;
+    _type: "image";
+    _key: string;
+  }>;
 };
 
 export type BlockContent = Array<{
@@ -302,32 +453,129 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = NavCategory | Series | NavCategoryReference | SanityImageAssetReference | Page | SanityImageCrop | SanityImageHotspot | BlockContent | Slug | ImageType | Event | SeriesReference | ImageTypeReference | Artwork | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = SanityImageAssetReference | SplitContent | ImagePair | ImageWithCaption | TextBlock | SiteSettings | SanityImageCrop | SanityImageHotspot | NavCategory | Series | PageBuilder | NavCategoryReference | Page | BlockContent | Slug | ImageType | Event | SeriesReference | ImageTypeReference | Artwork | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 
-// Source: ../web/src/routes/+layout.ts
-// Variable: artistPagesQuery
-// Query: *[_type == "page" && navCategory[0]->.title == "Meet the Artist"] | order(order asc){	_id,	title,	slug,	navTitle}
-export type ArtistPagesQueryResult = Array<{
+// Source: ../web/src/lib/exhibitionsQueries.ts
+// Variable: exhibitionsPageQuery
+// Query: *[_type == "page" && slug.current == "exhibitions"][0] {	_id,	title,	pageBuilder[] {		...,		_type == "imageWithCaption" => {			...,			image {				alt,				asset->{ url }			}		},		_type == "imagePair" => {			...,			leftImage {				alt,				asset->{ url }			},			rightImage {				alt,				asset->{ url }			}		},		_type == "splitContent" => {			...,			leftImage {				alt,				asset->{ url }			},			rightImage {				alt,				asset->{ url }			}		}	}}
+export type ExhibitionsPageQueryResult = {
   _id: string;
   title: string | null;
-  slug: Slug | null;
-  navTitle: string | null;
-}>;
+  pageBuilder: Array<{
+    _key: string;
+    _type: "imagePair";
+    leftImage: {
+      alt: string | null;
+      asset: {
+        url: string | null;
+      } | null;
+    } | null;
+    rightImage: {
+      alt: string | null;
+      asset: {
+        url: string | null;
+      } | null;
+    } | null;
+    ratio?: "equal" | "wideLeft" | "wideRight";
+  } | {
+    _key: string;
+    _type: "imageWithCaption";
+    image: {
+      alt: string | null;
+      asset: {
+        url: string | null;
+      } | null;
+    } | null;
+    caption?: string;
+    width?: "full" | "medium" | "narrow";
+  } | {
+    _key: string;
+    _type: "splitContent";
+    layout?: "both" | "left" | "right";
+    leftImage: {
+      alt: string | null;
+      asset: {
+        url: string | null;
+      } | null;
+    } | null;
+    leftCaption?: string;
+    body?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    rightImage: {
+      alt: string | null;
+      asset: {
+        url: string | null;
+      } | null;
+    } | null;
+    rightCaption?: string;
+  } | {
+    _key: string;
+    _type: "textBlock";
+    body?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    width?: "full" | "narrow";
+    align?: "center" | "left";
+  }> | null;
+} | null;
 
-// Source: ../web/src/routes/+layout.ts
-// Variable: artPagesQuery
-// Query: *[_type == "page" && navCategory[0]->.title == "Experience Art"] | order(order asc){	_id,	title,	slug,	navTitle}
-export type ArtPagesQueryResult = Array<{
+// Source: ../web/src/lib/exhibitionsQueries.ts
+// Variable: eventsQuery
+// Query: *[_type == "event" && (	(isMultiDay != true && date >= $today) ||	(isMultiDay == true && endDate >= $today))] | order(coalesce(startDate, date) asc) {	_id,	title,	isMultiDay,	date,	startDate,	endDate,	time,	venueName,	venueAddress,	description,	image {		alt,		asset->{ url }	}}
+export type EventsQueryResult = Array<{
   _id: string;
   title: string | null;
-  slug: Slug | null;
-  navTitle: string | null;
+  isMultiDay: boolean | null;
+  date: string | null;
+  startDate: string | null;
+  endDate: string | null;
+  time: string | null;
+  venueName: string | null;
+  venueAddress: string | null;
+  description: BlockContent | null;
+  image: {
+    alt: null;
+    asset: {
+      url: string | null;
+    } | null;
+  } | null;
 }>;
 
-// Source: ../web/src/routes/artist-biography/+page.ts
+// Source: ../web/src/lib/pageQueries.ts
 // Variable: bioQuery
-// Query: *[_type == "page" && slug.current == 'artist-biography'] {	_id,	title,	slug,	body,	mainImage{		alt,		secure_url,		url,		asset->{ url }	},	secondaryImage{		alt,		secure_url,		url,		asset->{ url }	}}
-export type BioQueryResult = Array<{
+// Query: *[_type == "page" && slug.current == "artist-biography"][0] {	_id,	title,	slug,	body,	mainImage{		alt,		secure_url,		url,		asset->{ url }	},	secondaryImage{		alt,		secure_url,		url,		asset->{ url }	}}
+export type BioQueryResult = {
   _id: string;
   title: string | null;
   slug: Slug | null;
@@ -348,6 +596,70 @@ export type BioQueryResult = Array<{
       url: string | null;
     } | null;
   } | null;
+} | null;
+
+// Source: ../web/src/lib/pageQueries.ts
+// Variable: herStudioQuery
+// Query: *[_type == "page" && slug.current == "her-studio"][0] {	_id,	title,	slug,	body,	studioHero {		alt,		asset->{ url }	},	studioGallery[] {		_key,		alt,		caption,		asset->{ url }	}}
+export type HerStudioQueryResult = {
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  body: BlockContent | null;
+  studioHero: {
+    alt: string | null;
+    asset: {
+      url: string | null;
+    } | null;
+  } | null;
+  studioGallery: Array<{
+    _key: string;
+    alt: string | null;
+    caption: string | null;
+    asset: {
+      url: string | null;
+    } | null;
+  }> | null;
+} | null;
+
+// Source: ../web/src/lib/siteSettingsQueries.ts
+// Variable: siteSettingsQuery
+// Query: *[_id == "siteSettings"][0] {	_id,	socialLinks[] {		_key,		title,		url,		image {			asset->{ url }		}	}}
+export type SiteSettingsQueryResult = {
+  _id: "siteSettings";
+  socialLinks: null;
+} | {
+  _id: "siteSettings";
+  socialLinks: Array<{
+    _key: string;
+    title: string | null;
+    url: string | null;
+    image: {
+      asset: {
+        url: string | null;
+      } | null;
+    } | null;
+  }> | null;
+} | null;
+
+// Source: ../web/src/routes/+layout.server.ts
+// Variable: artistPagesQuery
+// Query: *[_type == "page" && navCategory[0]->.title == "Meet the Artist"] | order(order asc){	_id,	title,	slug,	navTitle}
+export type ArtistPagesQueryResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  navTitle: string | null;
+}>;
+
+// Source: ../web/src/routes/+layout.server.ts
+// Variable: artPagesQuery
+// Query: *[_type == "page" && navCategory[0]->.title == "Experience Art"] | order(order asc){	_id,	title,	slug,	navTitle}
+export type ArtPagesQueryResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  navTitle: string | null;
 }>;
 
 // Source: ../web/src/routes/aspens/+page.ts
@@ -470,28 +782,6 @@ export type CommissionsQueryResult = Array<{
   } | null;
 }>;
 
-// Source: ../web/src/routes/exhibitions/+page.ts
-// Variable: eventsQuery
-// Query: *[_type == "event" && (	(isMultiDay != true && date >= $today) ||	(isMultiDay == true && endDate >= $today))] | order(coalesce(startDate, date) asc) {	_id,	title,	isMultiDay,	date,	startDate,	endDate,	time,	venueName,	venueAddress,	description,	image {		alt,		asset->{ url }	}}
-export type EventsQueryResult = Array<{
-  _id: string;
-  title: string | null;
-  isMultiDay: boolean | null;
-  date: string | null;
-  startDate: string | null;
-  endDate: string | null;
-  time: string | null;
-  venueName: string | null;
-  venueAddress: string | null;
-  description: BlockContent | null;
-  image: {
-    alt: null;
-    asset: {
-      url: string | null;
-    } | null;
-  } | null;
-}>;
-
 // Source: ../web/src/routes/fine-art-prints/+page.ts
 // Variable: finePrintsQuery
 // Query: *[_type == "artwork" && (title == "American War Horse" || title == "Blue Sky Basin" || title == "Moonlit Aspen")] | order(title asc){	_id,	title,	mainImage{		alt,		asset->{ url }	}}
@@ -504,16 +794,6 @@ export type FinePrintsQueryResult = Array<{
       url: string | null;
     } | null;
   } | null;
-}>;
-
-// Source: ../web/src/routes/her-studio/+page.ts
-// Variable: herStudioQuery
-// Query: *[_type == "page" && slug.current == 'her-studio'] {	_id,	title,	slug,	body}
-export type HerStudioQueryResult = Array<{
-  _id: string;
-  title: string | null;
-  slug: Slug | null;
-  body: BlockContent | null;
 }>;
 
 // Source: ../web/src/routes/original-artwork/+page.ts
@@ -599,15 +879,17 @@ export type OtherArtworkQueryResult = Array<{
 // Query TypeMap
 declare global {
   interface SanityQueries {
+    "*[_type == \"page\" && slug.current == \"exhibitions\"][0] {\n\t_id,\n\ttitle,\n\tpageBuilder[] {\n\t\t...,\n\t\t_type == \"imageWithCaption\" => {\n\t\t\t...,\n\t\t\timage {\n\t\t\t\talt,\n\t\t\t\tasset->{ url }\n\t\t\t}\n\t\t},\n\t\t_type == \"imagePair\" => {\n\t\t\t...,\n\t\t\tleftImage {\n\t\t\t\talt,\n\t\t\t\tasset->{ url }\n\t\t\t},\n\t\t\trightImage {\n\t\t\t\talt,\n\t\t\t\tasset->{ url }\n\t\t\t}\n\t\t},\n\t\t_type == \"splitContent\" => {\n\t\t\t...,\n\t\t\tleftImage {\n\t\t\t\talt,\n\t\t\t\tasset->{ url }\n\t\t\t},\n\t\t\trightImage {\n\t\t\t\talt,\n\t\t\t\tasset->{ url }\n\t\t\t}\n\t\t}\n\t}\n}": ExhibitionsPageQueryResult;
+    "*[_type == \"event\" && (\n\t(isMultiDay != true && date >= $today) ||\n\t(isMultiDay == true && endDate >= $today)\n)] | order(coalesce(startDate, date) asc) {\n\t_id,\n\ttitle,\n\tisMultiDay,\n\tdate,\n\tstartDate,\n\tendDate,\n\ttime,\n\tvenueName,\n\tvenueAddress,\n\tdescription,\n\timage {\n\t\talt,\n\t\tasset->{ url }\n\t}\n}": EventsQueryResult;
+    "*[_type == \"page\" && slug.current == \"artist-biography\"][0] {\n\t_id,\n\ttitle,\n\tslug,\n\tbody,\n\tmainImage{\n\t\talt,\n\t\tsecure_url,\n\t\turl,\n\t\tasset->{ url }\n\t},\n\tsecondaryImage{\n\t\talt,\n\t\tsecure_url,\n\t\turl,\n\t\tasset->{ url }\n\t}\n}": BioQueryResult;
+    "*[_type == \"page\" && slug.current == \"her-studio\"][0] {\n\t_id,\n\ttitle,\n\tslug,\n\tbody,\n\tstudioHero {\n\t\talt,\n\t\tasset->{ url }\n\t},\n\tstudioGallery[] {\n\t\t_key,\n\t\talt,\n\t\tcaption,\n\t\tasset->{ url }\n\t}\n}": HerStudioQueryResult;
+    "*[_id == \"siteSettings\"][0] {\n\t_id,\n\tsocialLinks[] {\n\t\t_key,\n\t\ttitle,\n\t\turl,\n\t\timage {\n\t\t\tasset->{ url }\n\t\t}\n\t}\n}": SiteSettingsQueryResult;
     "*[_type == \"page\" && navCategory[0]->.title == \"Meet the Artist\"] | order(order asc){\n\t_id,\n\ttitle,\n\tslug,\n\tnavTitle\n}": ArtistPagesQueryResult;
     "*[_type == \"page\" && navCategory[0]->.title == \"Experience Art\"] | order(order asc){\n\t_id,\n\ttitle,\n\tslug,\n\tnavTitle\n}": ArtPagesQueryResult;
-    "*[_type == \"page\" && slug.current == 'artist-biography'] {\n\t_id,\n\ttitle,\n\tslug,\n\tbody,\n\tmainImage{\n\t\talt,\n\t\tsecure_url,\n\t\turl,\n\t\tasset->{ url }\n\t},\n\tsecondaryImage{\n\t\talt,\n\t\tsecure_url,\n\t\turl,\n\t\tasset->{ url }\n\t}\n}": BioQueryResult;
     "*[_type == \"artwork\" && (\"Aspen\" in series[]->title)] | order(orderRank) {\n\t_id,\n\ttitle,\n\tslug,\n\tsize,\n\tseries[]->,\n\timgTypes[]->,\n\tprice,\n\tsold,\n\toriginalDescription,\n\tprintsDescription,\n\tcommissionDescription,\n\tetsyLink,\n\tmainImage{\n\t\talt,\n\t\tasset->{ url }\n\t}\n}": AspensQueryResult;
     "*[_type == \"artwork\" && (\"Colorado Flag\" in series[]->title)] | order(orderRank){\n\t_id,\n\ttitle,\n\tslug,\n\tsize,\n\tseries[]->,\n\timgTypes[]->,\n\tprice,\n\tsold,\n\toriginalDescription,\n\tprintsDescription,\n\tcommissionDescription,\n\tetsyLink,\n\tmainImage{\n\t\talt,\n\t\tasset->{ url }\n\t}\n}": ColoradoFlagQueryResult;
     "*[_type == \"artwork\" && (\"Commission\" in imgTypes[]->title)] | order(orderRank){\n\t_id,\n\ttitle,\n\tslug,\n\tsize,\n\tseries[0]->,\n\timgTypes[]->,\n\tprice,\n\tsold,\n\toriginalDescription,\n\tprintsDescription,\n\tcommissionDescription,\n\tetsyLink,\n\tmainImage{\n\t\talt,\n\t\tasset->{ url }\n\t}\n}": CommissionsQueryResult;
-    "*[_type == \"event\" && (\n\t(isMultiDay != true && date >= $today) ||\n\t(isMultiDay == true && endDate >= $today)\n)] | order(coalesce(startDate, date) asc) {\n\t_id,\n\ttitle,\n\tisMultiDay,\n\tdate,\n\tstartDate,\n\tendDate,\n\ttime,\n\tvenueName,\n\tvenueAddress,\n\tdescription,\n\timage {\n\t\talt,\n\t\tasset->{ url }\n\t}\n}": EventsQueryResult;
     "*[_type == \"artwork\" && (title == \"American War Horse\" || title == \"Blue Sky Basin\" || title == \"Moonlit Aspen\")] | order(title asc){\n\t_id,\n\ttitle,\n\tmainImage{\n\t\talt,\n\t\tasset->{ url }\n\t}\n}": FinePrintsQueryResult;
-    "*[_type == \"page\" && slug.current == 'her-studio'] {\n\t_id,\n\ttitle,\n\tslug,\n\tbody\n}": HerStudioQueryResult;
     "*[_type == \"artwork\" && (\"Original\" in imgTypes[]->title)] | order(orderRank){\n\t_id,\n\ttitle,\n\tslug,\n\tsize,\n\tseries[0]->,\n\timgTypes[]->,\n\tprice,\n\tsold,\n\toriginalDescription,\n\tprintsDescription,\n\tcommissionDescription,\n\tetsyLink,\n\tmainImage{\n\t\talt,\n\t\tasset->{ url }\n\t}\n}": OriginalArtworkQueryResult;
     "*[_type == \"artwork\" && (\"Other\" in series[]->title)] | order(orderRank){\n\t_id,\n\ttitle,\n\tslug,\n\tsize,\n\tseries[]->,\n\timgTypes[]->,\n\tprice,\n\tsold,\n\toriginalDescription,\n\tprintsDescription,\n\tcommissionDescription,\n\tetsyLink,\n\tmainImage{\n\t\talt,\n\t\tasset->{ url }\n\t}\n}": OtherArtworkQueryResult;
   }

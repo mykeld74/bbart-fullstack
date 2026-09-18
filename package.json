@@ -13,7 +13,7 @@
     "build": "pnpm typegen && pnpm --filter @bbart/web build",
     "build:studio": "pnpm --filter @bbart/studio build",
     "build:all": "pnpm build:studio && pnpm build",
-    "deploy:studio": "pnpm --filter @bbart/studio deploy",
+    "deploy:studio": "pnpm --filter @bbart/studio run deploy",
     "schema:extract": "pnpm --filter @bbart/studio schema:extract",
     "typegen": "pnpm --filter @bbart/studio typegen",
     "check": "pnpm --filter @bbart/web check",

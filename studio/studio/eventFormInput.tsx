@@ -1,4 +1,5 @@
 import {ObjectInputMember, ObjectInputMembers, type ObjectInputProps} from 'sanity'
+import {VisualEditorBanner} from './visualEditorBanner'
 
 /**
  * Event form: details on top, then image + description side by side.
@@ -36,6 +37,8 @@ export function EventFormInput(props: ObjectInputProps) {
 
   return (
     <div style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
+      <VisualEditorBanner documentType="event" />
+
       <ObjectInputMembers members={detailMembers} {...memberProps} />
 
       <div

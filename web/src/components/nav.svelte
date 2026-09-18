@@ -118,11 +118,16 @@
 	#navBar {
 		display: grid;
 		grid-template-columns: var(--navTemplateColumns);
+		align-items: center;
 		width: 100%;
 		max-width: 540px;
 	}
 
 	.buttonContainer {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 40px;
 		border-right: 1px solid #333;
 
 		&.artist {
@@ -145,6 +150,7 @@
 
 	.navSection {
 		position: relative;
+		height: 40px;
 	}
 	.pages {
 		position: absolute;
@@ -163,6 +169,8 @@
 				cursor: pointer;
 				text-align: center;
 				font-size: 16px;
+				margin: 0;
+				padding: 8px 0;
 			}
 		}
 	}
