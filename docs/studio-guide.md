@@ -37,8 +37,10 @@ Developer notes live in [`../studio/README.md`](../studio/README.md) instead.
   the title, then leave it alone.
 - **Price** takes numbers only — the site adds the dollar sign. Turn on **Sold**
   and it shows "Sold" instead.
-- Drag rows in the Artwork list to set the order. That order is used on every
-  gallery page, and it saves as soon as you drop it.
+- A new piece goes to the **top** of the Artwork list, and to the top of its
+  gallery pages.
+- Drag rows in the Artwork list to move a piece somewhere else. That order is
+  used on every gallery page, and it saves as soon as you drop it.
 
 ### Which gallery a piece appears on
 

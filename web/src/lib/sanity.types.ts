@@ -671,7 +671,7 @@ export type FinePrintsQueryResult = Array<{
 
 // Source: ../web/src/lib/exhibitionsQueries.ts
 // Variable: exhibitionsPageQuery
-// Query: *[_type == "page" && slug.current == "exhibitions"][0] {	_id,	title,	pageBuilder[] {		...,		_type == "imageWithCaption" => {			...,			image {				alt,				asset->{ url }			}		},		_type == "imagePair" => {			...,			leftImage {				alt,				asset->{ url }			},			rightImage {				alt,				asset->{ url }			}		},		_type == "splitContent" => {			...,			leftImage {				alt,				asset->{ url }			},			rightImage {				alt,				asset->{ url }			}		}	}}
+// Query: *[_type == "page" && slug.current == "exhibitions"][0] {	_id,	title,	pageBuilder[] {		...,		_type == "imageWithCaption" => {			...,			image {				alt,				asset->{ url }			}		},		_type == "imagePair" => {			...,			leftImage {				alt,				asset->{ url, metadata { dimensions { aspectRatio } } }			},			rightImage {				alt,				asset->{ url, metadata { dimensions { aspectRatio } } }			}		},		_type == "splitContent" => {			...,			leftImage {				alt,				asset->{ url, metadata { dimensions { aspectRatio } } }			},			rightImage {				alt,				asset->{ url, metadata { dimensions { aspectRatio } } }			}		}	}}
 export type ExhibitionsPageQueryResult = {
   _id: string;
   title: string | null;
@@ -682,12 +682,22 @@ export type ExhibitionsPageQueryResult = {
       alt: string | null;
       asset: {
         url: string | null;
+        metadata: {
+          dimensions: {
+            aspectRatio: number | null;
+          } | null;
+        } | null;
       } | null;
     } | null;
     rightImage: {
       alt: string | null;
       asset: {
         url: string | null;
+        metadata: {
+          dimensions: {
+            aspectRatio: number | null;
+          } | null;
+        } | null;
       } | null;
     } | null;
     ratio?: "equal" | "wideLeft" | "wideRight";
@@ -710,6 +720,11 @@ export type ExhibitionsPageQueryResult = {
       alt: string | null;
       asset: {
         url: string | null;
+        metadata: {
+          dimensions: {
+            aspectRatio: number | null;
+          } | null;
+        } | null;
       } | null;
     } | null;
     leftCaption?: string;
@@ -735,6 +750,11 @@ export type ExhibitionsPageQueryResult = {
       alt: string | null;
       asset: {
         url: string | null;
+        metadata: {
+          dimensions: {
+            aspectRatio: number | null;
+          } | null;
+        } | null;
       } | null;
     } | null;
     rightCaption?: string;
@@ -885,7 +905,7 @@ declare global {
     "*[_type == \"artwork\" && (\"Original\" in imgTypes[]->title)] | order(orderRank){\n\t_id,\n\ttitle,\n\tslug,\n\tsize,\n\tseries[0]->,\n\timgTypes[]->,\n\tprice,\n\tsold,\n\toriginalDescription,\n\tprintsDescription,\n\tcommissionDescription,\n\tetsyLink,\n\tmainImage{\n\t\talt,\n\t\tasset->{ url }\n\t}\n}": OriginalArtworkQueryResult;
     "*[_type == \"artwork\" && (\"Commission\" in imgTypes[]->title)] | order(orderRank){\n\t_id,\n\ttitle,\n\tslug,\n\tsize,\n\tseries[0]->,\n\timgTypes[]->,\n\tprice,\n\tsold,\n\toriginalDescription,\n\tprintsDescription,\n\tcommissionDescription,\n\tetsyLink,\n\tmainImage{\n\t\talt,\n\t\tasset->{ url }\n\t}\n}": CommissionsQueryResult;
     "*[_type == \"artwork\" && (title == \"American War Horse\" || title == \"Blue Sky Basin\" || title == \"Moonlit Aspen\")] | order(title asc){\n\t_id,\n\ttitle,\n\tmainImage{\n\t\talt,\n\t\tasset->{ url }\n\t}\n}": FinePrintsQueryResult;
-    "*[_type == \"page\" && slug.current == \"exhibitions\"][0] {\n\t_id,\n\ttitle,\n\tpageBuilder[] {\n\t\t...,\n\t\t_type == \"imageWithCaption\" => {\n\t\t\t...,\n\t\t\timage {\n\t\t\t\talt,\n\t\t\t\tasset->{ url }\n\t\t\t}\n\t\t},\n\t\t_type == \"imagePair\" => {\n\t\t\t...,\n\t\t\tleftImage {\n\t\t\t\talt,\n\t\t\t\tasset->{ url }\n\t\t\t},\n\t\t\trightImage {\n\t\t\t\talt,\n\t\t\t\tasset->{ url }\n\t\t\t}\n\t\t},\n\t\t_type == \"splitContent\" => {\n\t\t\t...,\n\t\t\tleftImage {\n\t\t\t\talt,\n\t\t\t\tasset->{ url }\n\t\t\t},\n\t\t\trightImage {\n\t\t\t\talt,\n\t\t\t\tasset->{ url }\n\t\t\t}\n\t\t}\n\t}\n}": ExhibitionsPageQueryResult;
+    "*[_type == \"page\" && slug.current == \"exhibitions\"][0] {\n\t_id,\n\ttitle,\n\tpageBuilder[] {\n\t\t...,\n\t\t_type == \"imageWithCaption\" => {\n\t\t\t...,\n\t\t\timage {\n\t\t\t\talt,\n\t\t\t\tasset->{ url }\n\t\t\t}\n\t\t},\n\t\t_type == \"imagePair\" => {\n\t\t\t...,\n\t\t\tleftImage {\n\t\t\t\talt,\n\t\t\t\tasset->{ url, metadata { dimensions { aspectRatio } } }\n\t\t\t},\n\t\t\trightImage {\n\t\t\t\talt,\n\t\t\t\tasset->{ url, metadata { dimensions { aspectRatio } } }\n\t\t\t}\n\t\t},\n\t\t_type == \"splitContent\" => {\n\t\t\t...,\n\t\t\tleftImage {\n\t\t\t\talt,\n\t\t\t\tasset->{ url, metadata { dimensions { aspectRatio } } }\n\t\t\t},\n\t\t\trightImage {\n\t\t\t\talt,\n\t\t\t\tasset->{ url, metadata { dimensions { aspectRatio } } }\n\t\t\t}\n\t\t}\n\t}\n}": ExhibitionsPageQueryResult;
     "*[_type == \"event\" && (\n\t(isMultiDay != true && date >= $today) ||\n\t(isMultiDay == true && endDate >= $today)\n)] | order(coalesce(startDate, date) asc) {\n\t_id,\n\ttitle,\n\tisMultiDay,\n\tdate,\n\tstartDate,\n\tendDate,\n\ttime,\n\tvenueName,\n\tvenueAddress,\n\tdescription,\n\timage {\n\t\talt,\n\t\tasset->{ url }\n\t}\n}": EventsQueryResult;
     "*[_type == \"page\" && slug.current == \"artist-biography\"][0] {\n\t_id,\n\ttitle,\n\tslug,\n\tbody,\n\tmainImage{\n\t\talt,\n\t\tsecure_url,\n\t\turl,\n\t\tasset->{ url }\n\t},\n\tsecondaryImage{\n\t\talt,\n\t\tsecure_url,\n\t\turl,\n\t\tasset->{ url }\n\t}\n}": BioQueryResult;
     "*[_type == \"page\" && slug.current == \"her-studio\"][0] {\n\t_id,\n\ttitle,\n\tslug,\n\tbody,\n\tstudioHero {\n\t\talt,\n\t\tasset->{ url }\n\t},\n\tstudioGallery[] {\n\t\t_key,\n\t\talt,\n\t\tcaption,\n\t\tasset->{ url }\n\t}\n}": HerStudioQueryResult;

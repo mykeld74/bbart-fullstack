@@ -36,7 +36,10 @@ export default defineType({
     },
   ],
   fields: [
-    orderRankField({type: 'artwork'}),
+    // 'before' ranks a new piece ahead of the current first one, so it lands at
+    // the top of the Artwork list — and, since the galleries order by orderRank
+    // too, at the top of its gallery pages.
+    orderRankField({type: 'artwork', newItemPosition: 'before'}),
     defineField({
       name: 'title',
       title: 'Title',
